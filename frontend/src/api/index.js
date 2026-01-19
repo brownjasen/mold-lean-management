@@ -1,4 +1,8 @@
 import axios from 'axios'
+import * as mockData from '../mock'
+
+// 检测是否为 GitHub Pages 环境（没有后端）
+const isGitHubPages = import.meta.env.MODE === 'production' || !import.meta.env.VITE_API_BASE_URL
 
 // 创建 axios 实例 - 支持环境变量
 const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api'
@@ -8,36 +12,23 @@ const request = axios.create({
   timeout: 10000
 })
 
-// 响应拦截器
-request.interceptors.response.use(
-  response => {
-    const res = response.data
-    if (res.code === 200) {
-      return res.data
-    } else {
-      return Promise.reject(new Error(res.message || '请求失败'))
-    }
-  },
-  error => {
-    console.error('请求错误:', error)
-    return Promise.reject(error)
-  }
-)
-
 // ==================== 模具 API ====================
 export const moldApi = {
   // 获取模具列表
-  getList() {
+  async getList() {
+    if (isGitHubPages) return mockData.mockMolds
     return request.get('/molds')
   },
 
   // 获取模具详情
-  getById(id) {
+  async getById(id) {
+    if (isGitHubPages) return mockData.mockMolds.find(m => m.id === parseInt(id))
     return request.get(`/molds/${id}`)
   },
 
   // 获取统计数据
-  getStatistics() {
+  async getStatistics() {
+    if (isGitHubPages) return mockData.mockStatistics
     return request.get('/molds/statistics')
   },
 
@@ -75,13 +66,17 @@ export const moldApi = {
 // ==================== 工序 API ====================
 export const processApi = {
   // 获取模具的工序列表
-  getByMoldId(moldId) {
+  async getByMoldId(moldId) {
+    if (isGitHubPages) return mockData.mockProcesses[moldId] || []
     return request.get(`/processes/mold/${moldId}`)
   },
 
   // 获取模具指定模块的工序列表
-  getByMoldIdAndModule(moldId, moduleType) {
-    return request.get(`/processes/mold/${moldId}/module/${moduleType}`)
+  async getByMoldIdAndModule(moldId, moduleType) {
+    const processes = isGitHubPages
+      ? (mockData.mockProcesses[moldId] || [])
+      : await request.get(`/processes/mold/${moldId}`)
+    return processes.filter(p => p.moduleType === moduleType)
   },
 
   // 获取工序详情
@@ -118,7 +113,8 @@ export const processApi = {
 // ==================== 图纸 API ====================
 export const blueprintApi = {
   // 获取模具的图纸列表
-  getByMoldId(moldId) {
+  async getByMoldId(moldId) {
+    if (isGitHubPages) return mockData.mockBlueprints[moldId] || []
     return request.get(`/blueprints/mold/${moldId}`)
   },
 
@@ -146,7 +142,8 @@ export const blueprintApi = {
 // ==================== 物料 API ====================
 export const materialApi = {
   // 获取物料列表
-  getList() {
+  async getList() {
+    if (isGitHubPages) return mockData.mockMaterials
     return request.get('/materials')
   },
 
@@ -156,7 +153,8 @@ export const materialApi = {
   },
 
   // 获取统计数据
-  getStatistics() {
+  async getStatistics() {
+    if (isGitHubPages) return mockData.mockMaterialStatistics
     return request.get('/materials/statistics')
   },
 
