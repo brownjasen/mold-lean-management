@@ -1,3 +1,5 @@
+# ==================== 前端 ====================
+
 # Logs
 logs
 *.log
@@ -7,24 +9,61 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-.DS_Store
+
+# Build outputs
 dist
 dist-ssr
-coverage
-*.local
 
-/cypress/videos/
-/cypress/screenshots/
-
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-*.tsbuildinfo
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env.local
+.env.*.local
+
+# ==================== 后端 ====================
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# IntelliJ IDEA
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Mac
+.DS_Store
+
+# ==================== 其他 ====================
+
+# Claude
+.claude/settings.local.json
+
+# 临时文件
+*.swp
+*.swo
+*~
+nul
