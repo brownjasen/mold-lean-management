@@ -1,0 +1,9 @@
+# Azure Static Web Apps 部署配置
+name: mold-lean-management-frontend
+runtime: node
+api_build_command: echo "No API"
+output: dist
+app_build_command: npm run build
+app_location: /
+api_location: ""
+skip_app_build: false

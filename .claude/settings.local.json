@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell:*)",
+      "Bash(cmd //c ~/.claude/statusline.bat)",
+      "Bash(cmd //c C:\\\\Users\\\\fanlj\\\\.claude\\\\statusline.bat)",
+      "Bash(test:*)",
+      "Bash(python:*)",
+      "Bash(bash E:/vue/.claude-statusline.sh)",
+      "Bash(dos2unix:*)",
+      "Bash(chmod:*)",
+      "Bash(mysql:*)",
+      "Bash(mvn spring-boot:run:*)",
+      "Bash(curl:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_navigate_back",
+      "mcp__playwright__browser_close",
+      "Bash(npm install:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
