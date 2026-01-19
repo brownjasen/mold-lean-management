@@ -29,7 +29,10 @@
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_console_messages",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(grep:*)",
+      "Bash(npm run preview:*)",
+      "Bash(timeout:*)"
     ]
   }
 }
